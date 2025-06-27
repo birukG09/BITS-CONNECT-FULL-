@@ -1,0 +1,78 @@
+[2025-06-24 23:49:00] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php:212)
+[stacktrace]
+#0 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(137): Illuminate\\Log\\LogManager->resolve()
+#1 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(124): Illuminate\\Log\\LogManager->get()
+#2 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(681): Illuminate\\Log\\LogManager->driver()
+#3 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(317): Illuminate\\Log\\LogManager->error()
+#4 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(278): Illuminate\\Foundation\\Exceptions\\Handler->reportThrowable()
+#5 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(523): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#6 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(203): Illuminate\\Foundation\\Console\\Kernel->reportException()
+#7 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\artisan(12): Illuminate\\Foundation\\Console\\Kernel->handle()
+#8 {main}
+"} 
+[2025-06-24 23:49:00] laravel.ERROR: RecursiveDirectoryIterator::__construct(): Argument #1 ($directory) must not be empty {"exception":"[object] (ValueError(code: 0): RecursiveDirectoryIterator::__construct(): Argument #1 ($directory) must not be empty at C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\symfony\\finder\\Iterator\\RecursiveDirectoryIterator.php:43)
+[stacktrace]
+#0 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\symfony\\finder\\Iterator\\RecursiveDirectoryIterator.php(43): RecursiveDirectoryIterator->__construct()
+#1 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\symfony\\finder\\Finder.php(793): Symfony\\Component\\Finder\\Iterator\\RecursiveDirectoryIterator->__construct()
+#2 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\symfony\\finder\\Finder.php(674): Symfony\\Component\\Finder\\Finder->searchInDirectory()
+#3 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(86): Symfony\\Component\\Finder\\Finder->getIterator()
+#4 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(63): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->getConfigurationFiles()
+#5 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(39): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->loadConfigurationFiles()
+#6 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(286): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->bootstrap()
+#7 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\artisan(12): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2025-06-24 23:49:01] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php:212)
+[stacktrace]
+#0 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(137): Illuminate\\Log\\LogManager->resolve()
+#1 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(124): Illuminate\\Log\\LogManager->get()
+#2 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(681): Illuminate\\Log\\LogManager->driver()
+#3 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(317): Illuminate\\Log\\LogManager->error()
+#4 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(278): Illuminate\\Foundation\\Exceptions\\Handler->reportThrowable()
+#5 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(523): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#6 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(203): Illuminate\\Foundation\\Console\\Kernel->reportException()
+#7 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\artisan(12): Illuminate\\Foundation\\Console\\Kernel->handle()
+#8 {main}
+"} 
+[2025-06-24 23:49:01] laravel.ERROR: RecursiveDirectoryIterator::__construct(): Argument #1 ($directory) must not be empty {"exception":"[object] (ValueError(code: 0): RecursiveDirectoryIterator::__construct(): Argument #1 ($directory) must not be empty at C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\symfony\\finder\\Iterator\\RecursiveDirectoryIterator.php:43)
+[stacktrace]
+#0 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\symfony\\finder\\Iterator\\RecursiveDirectoryIterator.php(43): RecursiveDirectoryIterator->__construct()
+#1 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\symfony\\finder\\Finder.php(793): Symfony\\Component\\Finder\\Iterator\\RecursiveDirectoryIterator->__construct()
+#2 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\symfony\\finder\\Finder.php(674): Symfony\\Component\\Finder\\Finder->searchInDirectory()
+#3 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(86): Symfony\\Component\\Finder\\Finder->getIterator()
+#4 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(63): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->getConfigurationFiles()
+#5 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(39): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->loadConfigurationFiles()
+#6 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(286): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->bootstrap()
+#7 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\artisan(12): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2025-06-24 23:52:03] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php:212)
+[stacktrace]
+#0 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(137): Illuminate\\Log\\LogManager->resolve()
+#1 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(124): Illuminate\\Log\\LogManager->get()
+#2 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Log\\LogManager.php(681): Illuminate\\Log\\LogManager->driver()
+#3 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(317): Illuminate\\Log\\LogManager->error()
+#4 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(278): Illuminate\\Foundation\\Exceptions\\Handler->reportThrowable()
+#5 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(523): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#6 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(203): Illuminate\\Foundation\\Console\\Kernel->reportException()
+#7 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\artisan(12): Illuminate\\Foundation\\Console\\Kernel->handle()
+#8 {main}
+"} 
+[2025-06-24 23:52:03] laravel.ERROR: RecursiveDirectoryIterator::__construct(): Argument #1 ($directory) must not be empty {"exception":"[object] (ValueError(code: 0): RecursiveDirectoryIterator::__construct(): Argument #1 ($directory) must not be empty at C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\symfony\\finder\\Iterator\\RecursiveDirectoryIterator.php:43)
+[stacktrace]
+#0 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\symfony\\finder\\Iterator\\RecursiveDirectoryIterator.php(43): RecursiveDirectoryIterator->__construct()
+#1 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\symfony\\finder\\Finder.php(793): Symfony\\Component\\Finder\\Iterator\\RecursiveDirectoryIterator->__construct()
+#2 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\symfony\\finder\\Finder.php(674): Symfony\\Component\\Finder\\Finder->searchInDirectory()
+#3 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(86): Symfony\\Component\\Finder\\Finder->getIterator()
+#4 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(63): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->getConfigurationFiles()
+#5 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\LoadConfiguration.php(39): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->loadConfigurationFiles()
+#6 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(286): Illuminate\\Foundation\\Bootstrap\\LoadConfiguration->bootstrap()
+#7 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 C:\\Users\\hp\\Downloads\\bi-ts-connect-project (3)\\artisan(12): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
