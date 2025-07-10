@@ -37,7 +37,7 @@ System analytics
 
 Resource approval system
 Installation
-Clone the repository:
+Clone the repository
 
 bash
 git clone https://github.com/abeni360/BITS-CONNECT-FULL-.git
