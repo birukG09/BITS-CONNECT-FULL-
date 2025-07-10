@@ -81,7 +81,7 @@ Bootstrap 5
 
 Chart.js
 
-Font Awesome
+
 
 Security Considerations
 Always keep API keys secure
