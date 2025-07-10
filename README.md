@@ -14,8 +14,7 @@ Admin dashboard for content management
 
 Features
 Core Functionality
-User Authentication: Secure login system with role-based access
-
+User Authentication: Secure login system with role-based access.
 Resource Management: Upload, download, and organize study materials
 
 GPA Tracking: Semester-wise GPA calculation and tracking
