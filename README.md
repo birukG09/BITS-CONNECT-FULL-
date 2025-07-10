@@ -6,7 +6,7 @@ Resource sharing and management
 
 GPA tracking
 
-Chat functionality
+Chat functionality .
 
 External content integration (YouTube, Telegram, blogs)
 
