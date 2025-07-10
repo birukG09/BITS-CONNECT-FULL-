@@ -47,47 +47,6 @@ Create a MySQL database named bits_connect
 
 Update config/config.php with your database credentials
 
-Set up the web server:
 
-Point your web server to the public directory
-
-Ensure PHP 7.4+ is installed
-
-Configure API keys:
-
-Update YouTube API key in youtube.php
-
-Set Telegram bot token in config.php
-
-Usage
-Admin Access
-Access the admin dashboard at /dashboard.php (requires admin privileges)
-
-API Endpoints
-Authentication: /api/auth.php
-
-Resources: /api/resources.php
-
-GPA Tracking: /api/gpa.php
-
-Chat: /api/chat.php
-
-Dependencies
-PHP 7.4+
-
-MySQL 5.7+
-
-Bootstrap 5
-
-Chart.js
-
-
-
-Security Considerations
-Always keep API keys secure
-
-Regularly update dependencies
-
-Set proper file permissions for uploads directory
 
 Use HTTPS in production
