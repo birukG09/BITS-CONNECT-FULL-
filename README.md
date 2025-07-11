@@ -18,7 +18,7 @@ This platform offers a digital learning experience powered by **HTML**, **CSS**,
 | 💬 **Messaging System** | Real-time communication between students and teachers. |
 | 📰 **Blog Platform** | Write, share, and comment on academic content. |
 | 🧑‍💼 **Admin Dashboard** | Control content, monitor users, and manage data access. |
-
+![image alt](https://github.com/birukG09/BITS-CONNECT-FULL-/blob/03ef8578a1329e23db7bea9c7add4c905035b0c4/Screenshot%202025-07-03%20003416.png)
 ---
 
 ## 🚀 Quick Start
