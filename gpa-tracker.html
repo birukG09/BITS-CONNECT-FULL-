@@ -1,0 +1,926 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GPA Tracker - BiTS Connect</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link href="assets/css/custom.css" rel="stylesheet" />
+  </head>
+  <body class="bg-light">
+    <!-- Navigation -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-white sticky-top border-bottom shadow-sm"
+      id="mainNav"
+    >
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+          <div class="bg-primary rounded me-2 p-2">
+            <i class="bi bi-book text-white"></i>
+          </div>
+          <span class="fw-bold">BiTS Connect</span>
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="dashboard.html">
+                <i class="bi bi-speedometer2 me-1"></i>Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="gpa-tracker.html">
+                <i class="bi bi-bar-chart me-1"></i>GPA Tracker
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="assignments.html">
+                <i class="bi bi-file-earmark-text me-1"></i>Assignments
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="library.html">
+                <i class="bi bi-book me-1"></i>Digital Library
+              </a>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center">
+            <span class="me-3">
+              <i class="bi bi-person me-1"></i>
+              <span id="userName">Abenezer Bekele</span>
+              <small class="text-muted">(Student)</small>
+              <span id="demoIndicator" class="badge bg-warning ms-2">Demo</span>
+            </span>
+            <button class="btn btn-outline-secondary" onclick="logout()">
+              <i class="bi bi-box-arrow-right me-1"></i>Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-4">
+      <!-- Header -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h1 class="h3 mb-1">
+                <i class="bi bi-bar-chart text-primary me-2"></i>GPA Tracker
+              </h1>
+              <p class="text-muted mb-0">
+                Track your academic progress and calculate your GPA
+              </p>
+            </div>
+            <div class="d-flex gap-2">
+              <button
+                class="btn btn-outline-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#addCourseModal"
+              >
+                <i class="bi bi-plus-lg me-2"></i>Add Course
+              </button>
+              <button class="btn btn-primary" onclick="exportTranscript()">
+                <i class="bi bi-download me-2"></i>Export Transcript
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GPA Overview Cards -->
+      <div class="row g-4 mb-4">
+        <div class="col-lg-3 col-md-6">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body text-center">
+              <div class="display-4 fw-bold text-primary mb-2" id="currentGPA">
+                3.85
+              </div>
+              <h6 class="mb-1">Current GPA</h6>
+              <small class="text-muted">Cumulative</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body text-center">
+              <div
+                class="display-4 fw-bold text-success mb-2"
+                id="totalCredits"
+              >
+                96
+              </div>
+              <h6 class="mb-1">Credits Earned</h6>
+              <small class="text-muted">Out of 140 required</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body text-center">
+              <div class="display-4 fw-bold text-info mb-2" id="semesterGPA">
+                3.92
+              </div>
+              <h6 class="mb-1">Semester GPA</h6>
+              <small class="text-muted">Current term</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body text-center">
+              <div
+                class="display-4 fw-bold text-warning mb-2"
+                id="graduationProgress"
+              >
+                69%
+              </div>
+              <h6 class="mb-1">Progress</h6>
+              <small class="text-muted">To graduation</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Graduation Progress Bar -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body">
+              <div
+                class="d-flex justify-content-between align-items-center mb-3"
+              >
+                <h5 class="mb-0">
+                  <i class="bi bi-mortarboard text-primary me-2"></i>Graduation
+                  Progress
+                </h5>
+                <span class="badge bg-primary" id="creditsRemaining"
+                  >44 credits remaining</span
+                >
+              </div>
+              <div class="progress mb-3" style="height: 20px">
+                <div
+                  class="progress-bar bg-gradient"
+                  role="progressbar"
+                  style="width: 69%"
+                  id="progressBar"
+                >
+                  96/140 Credits
+                </div>
+              </div>
+              <div class="row text-center">
+                <div class="col-md-3">
+                  <div class="fw-bold text-primary">96</div>
+                  <small class="text-muted">Completed</small>
+                </div>
+                <div class="col-md-3">
+                  <div class="fw-bold text-info">18</div>
+                  <small class="text-muted">In Progress</small>
+                </div>
+                <div class="col-md-3">
+                  <div class="fw-bold text-warning">26</div>
+                  <small class="text-muted">Remaining</small>
+                </div>
+                <div class="col-md-3">
+                  <div class="fw-bold text-success">140</div>
+                  <small class="text-muted">Total Required</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Program Selection and Course Management -->
+      <div class="row g-4 mb-4">
+        <!-- Program Selection -->
+        <div class="col-lg-4">
+          <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-bottom-0">
+              <h6 class="mb-0">
+                <i class="bi bi-journal-bookmark text-primary me-2"></i>Academic
+                Program
+              </h6>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <label for="programSelect" class="form-label"
+                  >Select Your Program</label
+                >
+                <select
+                  class="form-select"
+                  id="programSelect"
+                  onchange="loadProgramCourses()"
+                >
+                  <option value="software_engineering">
+                    🎓 Software Engineering - B.Sc.
+                  </option>
+                  <option value="it_systems">
+                    💻 Information Technology and Systems - B.Sc.
+                  </option>
+                </select>
+              </div>
+
+              <!-- Quick Stats -->
+              <div class="mb-3">
+                <div class="row text-center">
+                  <div class="col-6">
+                    <div class="border rounded p-2">
+                      <div class="fw-bold text-primary" id="programCompleted">
+                        32
+                      </div>
+                      <small class="text-muted">Courses Taken</small>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="border rounded p-2">
+                      <div class="fw-bold text-success" id="programRemaining">
+                        15
+                      </div>
+                      <small class="text-muted">Remaining</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Actions -->
+              <div class="d-grid gap-2">
+                <button
+                  class="btn btn-outline-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#addCourseModal"
+                >
+                  <i class="bi bi-plus me-2"></i>Add Course
+                </button>
+                <button
+                  class="btn btn-outline-success"
+                  onclick="calculateGPA()"
+                >
+                  <i class="bi bi-calculator me-2"></i>Recalculate GPA
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BiTS Grading Scale -->
+        <div class="col-lg-8">
+          <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-bottom-0">
+              <h6 class="mb-0">
+                <i class="bi bi-award text-primary me-2"></i>BiTS Grading Scale
+              </h6>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-sm mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Letter Grade</th>
+                      <th>Mark Range</th>
+                      <th>Grade Points</th>
+                      <th>Remarks</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><span class="badge bg-success">A+</span></td>
+                      <td>95-100</td>
+                      <td class="fw-bold">4.00</td>
+                      <td>Exceptional</td>
+                    </tr>
+                    <tr>
+                      <td><span class="badge bg-success">A</span></td>
+                      <td>85-94</td>
+                      <td class="fw-bold">4.00</td>
+                      <td>Outstanding</td>
+                    </tr>
+                    <tr>
+                      <td><span class="badge bg-primary">A−</span></td>
+                      <td>80-84</td>
+                      <td class="fw-bold">3.70</td>
+                      <td>Excellent</td>
+                    </tr>
+                    <tr>
+                      <td><span class="badge bg-primary">B+</span></td>
+                      <td>75-79</td>
+                      <td class="fw-bold">3.50</td>
+                      <td>Very Good</td>
+                    </tr>
+                    <tr>
+                      <td><span class="badge bg-info">B</span></td>
+                      <td>65-74</td>
+                      <td class="fw-bold">3.00</td>
+                      <td>Good</td>
+                    </tr>
+                    <tr>
+                      <td><span class="badge bg-info">B−</span></td>
+                      <td>60-64</td>
+                      <td class="fw-bold">2.70</td>
+                      <td>Moderate</td>
+                    </tr>
+                    <tr>
+                      <td><span class="badge bg-warning">C+</span></td>
+                      <td>55-59</td>
+                      <td class="fw-bold">2.50</td>
+                      <td>Fair</td>
+                    </tr>
+                    <tr>
+                      <td><span class="badge bg-warning">C</span></td>
+                      <td>50-54</td>
+                      <td class="fw-bold">2.00</td>
+                      <td>Satisfactory</td>
+                    </tr>
+                    <tr>
+                      <td><span class="badge bg-secondary">C−</span></td>
+                      <td>45-49</td>
+                      <td class="fw-bold">1.75</td>
+                      <td>Marginal</td>
+                    </tr>
+                    <tr>
+                      <td><span class="badge bg-danger">D</span></td>
+                      <td>40-44</td>
+                      <td class="fw-bold">1.00</td>
+                      <td>Fail</td>
+                    </tr>
+                    <tr>
+                      <td><span class="badge bg-danger">F</span></td>
+                      <td>&lt;40</td>
+                      <td class="fw-bold">0.00</td>
+                      <td>Fail</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Year/Semester Overview -->
+      <div class="row g-4 mb-4">
+        <div class="col-12">
+          <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-bottom-0">
+              <h6 class="mb-0">
+                <i class="bi bi-calendar3 text-primary me-2"></i>Academic
+                Progress by Year & Semester
+              </h6>
+            </div>
+            <div class="card-body">
+              <div class="row g-3">
+                <!-- Year 1 -->
+                <div class="col-lg-3 col-md-6">
+                  <div class="card border border-primary">
+                    <div
+                      class="card-header bg-primary bg-opacity-10 text-center"
+                    >
+                      <h6 class="mb-0 text-primary">Year 1 (Freshman)</h6>
+                    </div>
+                    <div class="card-body p-2">
+                      <div class="row text-center">
+                        <div class="col-6">
+                          <div class="border-end">
+                            <div class="fw-bold" id="year1sem1GPA">3.67</div>
+                            <small class="text-muted">Fall 2022</small>
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="fw-bold" id="year1sem2GPA">3.83</div>
+                          <small class="text-muted">Spring 2023</small>
+                        </div>
+                      </div>
+                      <hr class="my-2" />
+                      <div class="text-center">
+                        <div class="fw-bold text-primary" id="year1GPA">
+                          3.75
+                        </div>
+                        <small class="text-muted">Year 1 GPA</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Year 2 -->
+                <div class="col-lg-3 col-md-6">
+                  <div class="card border border-success">
+                    <div
+                      class="card-header bg-success bg-opacity-10 text-center"
+                    >
+                      <h6 class="mb-0 text-success">Year 2 (Sophomore)</h6>
+                    </div>
+                    <div class="card-body p-2">
+                      <div class="row text-center">
+                        <div class="col-6">
+                          <div class="border-end">
+                            <div class="fw-bold" id="year2sem1GPA">3.67</div>
+                            <small class="text-muted">Fall 2023</small>
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="fw-bold" id="year2sem2GPA">4.00</div>
+                          <small class="text-muted">Spring 2024</small>
+                        </div>
+                      </div>
+                      <hr class="my-2" />
+                      <div class="text-center">
+                        <div class="fw-bold text-success" id="year2GPA">
+                          3.84
+                        </div>
+                        <small class="text-muted">Year 2 GPA</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Year 3 -->
+                <div class="col-lg-3 col-md-6">
+                  <div class="card border border-warning">
+                    <div
+                      class="card-header bg-warning bg-opacity-10 text-center"
+                    >
+                      <h6 class="mb-0 text-warning">Year 3 (Junior)</h6>
+                    </div>
+                    <div class="card-body p-2">
+                      <div class="row text-center">
+                        <div class="col-6">
+                          <div class="border-end">
+                            <div class="fw-bold" id="year3sem1GPA">3.92</div>
+                            <small class="text-muted">Fall 2024</small>
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="fw-bold text-muted" id="year3sem2GPA">
+                            --
+                          </div>
+                          <small class="text-muted">Spring 2025</small>
+                        </div>
+                      </div>
+                      <hr class="my-2" />
+                      <div class="text-center">
+                        <div class="fw-bold text-warning" id="year3GPA">
+                          3.92
+                        </div>
+                        <small class="text-muted">Year 3 GPA</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Year 4 -->
+                <div class="col-lg-3 col-md-6">
+                  <div class="card border border-secondary">
+                    <div
+                      class="card-header bg-secondary bg-opacity-10 text-center"
+                    >
+                      <h6 class="mb-0 text-secondary">Year 4 (Senior)</h6>
+                    </div>
+                    <div class="card-body p-2">
+                      <div class="row text-center">
+                        <div class="col-6">
+                          <div class="border-end">
+                            <div class="fw-bold text-muted" id="year4sem1GPA">
+                              --
+                            </div>
+                            <small class="text-muted">Fall 2025</small>
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="fw-bold text-muted" id="year4sem2GPA">
+                            --
+                          </div>
+                          <small class="text-muted">Spring 2026</small>
+                        </div>
+                      </div>
+                      <hr class="my-2" />
+                      <div class="text-center">
+                        <div class="fw-bold text-secondary" id="year4GPA">
+                          --
+                        </div>
+                        <small class="text-muted">Year 4 GPA</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course List -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-bottom-0">
+              <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                  <i class="bi bi-list-check text-primary me-2"></i>My Courses
+                </h5>
+                <div class="d-flex gap-2">
+                  <div class="btn-group btn-group-sm">
+                    <button
+                      class="btn btn-outline-secondary active"
+                      id="allCoursesBtn"
+                      onclick="filterCourses('all')"
+                    >
+                      All
+                    </button>
+                    <button
+                      class="btn btn-outline-secondary"
+                      id="completedBtn"
+                      onclick="filterCourses('completed')"
+                    >
+                      Completed
+                    </button>
+                    <button
+                      class="btn btn-outline-secondary"
+                      id="inProgressBtn"
+                      onclick="filterCourses('inprogress')"
+                    >
+                      In Progress
+                    </button>
+                    <button
+                      class="btn btn-outline-secondary"
+                      id="plannedBtn"
+                      onclick="filterCourses('planned')"
+                    >
+                      Planned
+                    </button>
+                  </div>
+
+                  <div class="btn-group btn-group-sm">
+                    <select
+                      class="form-select form-select-sm"
+                      id="yearFilter"
+                      onchange="filterByYear()"
+                    >
+                      <option value="">All Years</option>
+                      <option value="1">Year 1</option>
+                      <option value="2">Year 2</option>
+                      <option value="3">Year 3</option>
+                      <option value="4">Year 4</option>
+                    </select>
+                    <select
+                      class="form-select form-select-sm"
+                      id="semesterFilter"
+                      onchange="filterBySemester()"
+                    >
+                      <option value="">All Semesters</option>
+                      <option value="Fall 2022">Fall 2022</option>
+                      <option value="Spring 2023">Spring 2023</option>
+                      <option value="Fall 2023">Fall 2023</option>
+                      <option value="Spring 2024">Spring 2024</option>
+                      <option value="Fall 2024">Fall 2024</option>
+                      <option value="Spring 2025">Spring 2025</option>
+                      <option value="Fall 2025">Fall 2025</option>
+                      <option value="Spring 2026">Spring 2026</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Course Code</th>
+                      <th>Course Title</th>
+                      <th>Year</th>
+                      <th>Semester</th>
+                      <th>Credits</th>
+                      <th>Grade</th>
+                      <th>Grade Points</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="coursesTableBody">
+                    <!-- Courses will be populated here -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Semester Performance Chart -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-bottom-0">
+              <h6 class="mb-0">
+                <i class="bi bi-graph-up text-primary me-2"></i>GPA Trend
+                Analysis
+              </h6>
+            </div>
+            <div class="card-body">
+              <canvas id="gpaChart" height="100"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Course Modal -->
+    <div class="modal fade" id="addCourseModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add Course</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="addCourseForm">
+              <div class="row g-3">
+                <div class="col-12">
+                  <label for="courseSelect" class="form-label"
+                    >Select Course</label
+                  >
+                  <select
+                    class="form-select"
+                    id="courseSelect"
+                    onchange="populateCourseDetails()"
+                  >
+                    <option value="">Choose from curriculum...</option>
+                    <!-- Options will be populated based on selected program -->
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="customCourseCode" class="form-label"
+                    >Course Code</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="customCourseCode"
+                    placeholder="e.g., SE101"
+                  />
+                </div>
+
+                <div class="col-md-6">
+                  <label for="customCourseTitle" class="form-label"
+                    >Course Title</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="customCourseTitle"
+                    placeholder="e.g., Introduction to Computer Systems"
+                  />
+                </div>
+
+                <div class="col-md-4">
+                  <label for="courseCredits" class="form-label"
+                    >Credit Hours</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="courseCredits"
+                    min="1"
+                    max="6"
+                    value="3"
+                  />
+                </div>
+
+                <div class="col-md-4">
+                  <label for="courseGrade" class="form-label"
+                    >Letter Grade</label
+                  >
+                  <select class="form-select" id="courseGrade">
+                    <option value="">Select Grade</option>
+                    <option value="A+">A+ (4.00)</option>
+                    <option value="A">A (4.00)</option>
+                    <option value="A-">A− (3.70)</option>
+                    <option value="B+">B+ (3.50)</option>
+                    <option value="B">B (3.00)</option>
+                    <option value="B-">B− (2.70)</option>
+                    <option value="C+">C+ (2.50)</option>
+                    <option value="C">C (2.00)</option>
+                    <option value="C-">C− (1.75)</option>
+                    <option value="D">D (1.00)</option>
+                    <option value="F">F (0.00)</option>
+                  </select>
+                </div>
+
+                <div class="col-md-4">
+                  <label for="courseStatus" class="form-label">Status</label>
+                  <select class="form-select" id="courseStatus">
+                    <option value="completed">Completed</option>
+                    <option value="inprogress">In Progress</option>
+                    <option value="planned">Planned</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="courseYear" class="form-label"
+                    >Academic Year</label
+                  >
+                  <select class="form-select" id="courseYear">
+                    <option value="">Select Year</option>
+                    <option value="1">Year 1 (Freshman)</option>
+                    <option value="2">Year 2 (Sophomore)</option>
+                    <option value="3">Year 3 (Junior)</option>
+                    <option value="4">Year 4 (Senior)</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="courseSemester" class="form-label"
+                    >Semester</label
+                  >
+                  <select class="form-select" id="courseSemester">
+                    <option value="">Select Semester</option>
+                    <option value="Fall 2022">Fall 2022 (Sem 1)</option>
+                    <option value="Spring 2023">Spring 2023 (Sem 2)</option>
+                    <option value="Fall 2023">Fall 2023 (Sem 3)</option>
+                    <option value="Spring 2024">Spring 2024 (Sem 4)</option>
+                    <option value="Fall 2024">Fall 2024 (Sem 5)</option>
+                    <option value="Spring 2025">Spring 2025 (Sem 6)</option>
+                    <option value="Fall 2025">Fall 2025 (Sem 7)</option>
+                    <option value="Spring 2026">Spring 2026 (Sem 8)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="mt-4">
+                <div class="alert alert-info d-flex align-items-center">
+                  <i class="bi bi-info-circle me-2"></i>
+                  <small
+                    >Choose from the curriculum dropdown or enter custom course
+                    details. Only completed courses with grades will count
+                    toward GPA calculation.</small
+                  >
+                </div>
+              </div>
+
+              <div class="d-grid mt-3">
+                <button type="submit" class="btn btn-primary">
+                  <i class="bi bi-plus-lg me-2"></i>Add Course
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Course Modal -->
+    <div class="modal fade" id="editCourseModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Edit Course</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="editCourseForm">
+              <input type="hidden" id="editCourseId" />
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="editCourseCode" class="form-label"
+                    >Course Code</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="editCourseCode"
+                    readonly
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="editCourseCredits" class="form-label"
+                    >Credits</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="editCourseCredits"
+                    min="1"
+                    max="6"
+                  />
+                </div>
+                <div class="col-12">
+                  <label for="editCourseTitle" class="form-label"
+                    >Course Title</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="editCourseTitle"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="editCourseGrade" class="form-label">Grade</label>
+                  <select class="form-select" id="editCourseGrade">
+                    <option value="">Select Grade</option>
+                    <option value="A+">A+ (4.00)</option>
+                    <option value="A">A (4.00)</option>
+                    <option value="A-">A− (3.70)</option>
+                    <option value="B+">B+ (3.50)</option>
+                    <option value="B">B (3.00)</option>
+                    <option value="B-">B− (2.70)</option>
+                    <option value="C+">C+ (2.50)</option>
+                    <option value="C">C (2.00)</option>
+                    <option value="C-">C− (1.75)</option>
+                    <option value="D">D (1.00)</option>
+                    <option value="F">F (0.00)</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="editCourseStatus" class="form-label"
+                    >Status</label
+                  >
+                  <select class="form-select" id="editCourseStatus">
+                    <option value="completed">Completed</option>
+                    <option value="inprogress">In Progress</option>
+                    <option value="planned">Planned</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="editCourseYear" class="form-label"
+                    >Academic Year</label
+                  >
+                  <select class="form-select" id="editCourseYear">
+                    <option value="">Select Year</option>
+                    <option value="1">Year 1 (Freshman)</option>
+                    <option value="2">Year 2 (Sophomore)</option>
+                    <option value="3">Year 3 (Junior)</option>
+                    <option value="4">Year 4 (Senior)</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="editCourseSemester" class="form-label"
+                    >Semester</label
+                  >
+                  <select class="form-select" id="editCourseSemester">
+                    <option value="">Select Semester</option>
+                    <option value="Fall 2022">Fall 2022 (Sem 1)</option>
+                    <option value="Spring 2023">Spring 2023 (Sem 2)</option>
+                    <option value="Fall 2023">Fall 2023 (Sem 3)</option>
+                    <option value="Spring 2024">Spring 2024 (Sem 4)</option>
+                    <option value="Fall 2024">Fall 2024 (Sem 5)</option>
+                    <option value="Spring 2025">Spring 2025 (Sem 6)</option>
+                    <option value="Fall 2025">Fall 2025 (Sem 7)</option>
+                    <option value="Spring 2026">Spring 2026 (Sem 8)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-primary">
+                  <i class="bi bi-check-lg me-2"></i>Update Course
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/gpa-tracker.js"></script>
+  </body>
+</html>

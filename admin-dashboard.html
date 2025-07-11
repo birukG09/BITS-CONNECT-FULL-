@@ -1,0 +1,1059 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Academic Administration - BiTS Connect</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link href="assets/css/custom.css" rel="stylesheet" />
+    <link href="assets/css/admin.css" rel="stylesheet" />
+  </head>
+  <body class="admin-body dark-theme">
+    <!-- Admin Header Bar -->
+    <header class="admin-header">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+          <button class="btn btn-dark d-lg-none me-3" onclick="toggleSidebar()">
+            <i class="bi bi-list"></i>
+          </button>
+          <div class="admin-logo">
+            <i class="bi bi-mortarboard text-primary me-2"></i>
+            <span class="fw-bold">BiTS</span>
+            <span class="text-primary">ADMINISTRATION</span>
+            <span class="badge bg-primary ms-2">ACADEMIC</span>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center">
+          <!-- System Status -->
+          <div class="d-flex align-items-center me-4">
+            <div class="status-indicator online me-2"></div>
+            <small class="text-muted">System Online</small>
+          </div>
+
+          <!-- Quick Stats -->
+          <div class="d-none d-md-flex align-items-center me-4">
+            <span class="badge bg-success me-2">335 Students</span>
+            <span class="badge bg-info me-2">42 Teachers</span>
+            <span class="badge bg-warning">12 Pending</span>
+          </div>
+
+          <!-- Admin Profile -->
+          <div class="dropdown">
+            <button
+              class="btn btn-outline-light dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+            >
+              <i class="bi bi-person-gear me-2"></i>
+              <span class="d-none d-md-inline">Administrator</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><h6 class="dropdown-header">System Admin</h6></li>
+              <li>
+                <a class="dropdown-item" href="#"
+                  ><i class="bi bi-person me-2"></i>Admin Profile</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="#"
+                  ><i class="bi bi-gear me-2"></i>Preferences</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="#"
+                  ><i class="bi bi-shield-check me-2"></i>Security</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="#"
+                  ><i class="bi bi-clock-history me-2"></i>Session History</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item text-danger" href="index.html"
+                  ><i class="bi bi-power me-2"></i>Logout</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Sidebar -->
+    <nav class="admin-sidebar" id="sidebar">
+      <div class="sidebar-content">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header">
+          <div class="text-center py-3">
+            <i class="bi bi-building display-4 text-primary mb-2"></i>
+            <h6 class="text-white mb-0">Academic Admin</h6>
+            <small class="text-muted">Fall 2024 Semester</small>
+          </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <div class="sidebar-menu">
+          <div class="menu-section">
+            <h6 class="menu-title">OVERVIEW</h6>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  href="#dashboard"
+                  onclick="showSection('dashboard')"
+                >
+                  <i class="bi bi-speedometer2 me-3"></i>
+                  <span>Dashboard</span>
+                  <span class="nav-indicator"></span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#reports"
+                  onclick="showSection('reports')"
+                >
+                  <i class="bi bi-file-earmark-bar-graph me-3"></i>
+                  <span>Academic Reports</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="menu-section">
+            <h6 class="menu-title">STUDENT MANAGEMENT</h6>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#students"
+                  onclick="showSection('students')"
+                >
+                  <i class="bi bi-people me-3"></i>
+                  <span>All Students</span>
+                  <span class="badge bg-info ms-auto">285</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#admissions"
+                  onclick="showSection('admissions')"
+                >
+                  <i class="bi bi-person-plus me-3"></i>
+                  <span>Admissions</span>
+                  <span class="badge bg-warning ms-auto">12</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#graduations"
+                  onclick="showSection('graduations')"
+                >
+                  <i class="bi bi-mortarboard me-3"></i>
+                  <span>Graduations</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="menu-section">
+            <h6 class="menu-title">FACULTY MANAGEMENT</h6>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#teachers"
+                  onclick="showSection('teachers')"
+                >
+                  <i class="bi bi-person-workspace me-3"></i>
+                  <span>Faculty</span>
+                  <span class="badge bg-success ms-auto">42</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#assignments"
+                  onclick="showSection('assignments')"
+                >
+                  <i class="bi bi-calendar-check me-3"></i>
+                  <span>Class Assignments</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#performance"
+                  onclick="showSection('performance')"
+                >
+                  <i class="bi bi-graph-up me-3"></i>
+                  <span>Faculty Performance</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="menu-section">
+            <h6 class="menu-title">ACADEMIC PROGRAMS</h6>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#programs"
+                  onclick="showSection('programs')"
+                >
+                  <i class="bi bi-journal-bookmark me-3"></i>
+                  <span>Programs & Courses</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#curriculum"
+                  onclick="showSection('curriculum')"
+                >
+                  <i class="bi bi-book me-3"></i>
+                  <span>Curriculum</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#schedule"
+                  onclick="showSection('schedule')"
+                >
+                  <i class="bi bi-calendar3 me-3"></i>
+                  <span>Academic Calendar</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="menu-section">
+            <h6 class="menu-title">COLLEGE OPERATIONS</h6>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#finance"
+                  onclick="showSection('finance')"
+                >
+                  <i class="bi bi-cash-stack me-3"></i>
+                  <span>Finance & Fees</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#resources"
+                  onclick="showSection('resources')"
+                >
+                  <i class="bi bi-building me-3"></i>
+                  <span>Resources & Facilities</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#settings"
+                  onclick="showSection('settings')"
+                >
+                  <i class="bi bi-gear me-3"></i>
+                  <span>College Settings</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Sidebar Footer -->
+        <div class="sidebar-footer">
+          <div class="admin-info">
+            <div class="d-flex align-items-center mb-3">
+              <div class="admin-avatar">
+                <i class="bi bi-person-gear"></i>
+              </div>
+              <div class="ms-3">
+                <div class="admin-name">Biruk Gebre</div>
+                <div class="admin-role">System Administrator</div>
+                <div class="admin-session">Session: 2h 15m</div>
+              </div>
+            </div>
+            <div class="quick-actions">
+              <button
+                class="btn btn-outline-light btn-sm me-2"
+                title="Lock Session"
+              >
+                <i class="bi bi-lock"></i>
+              </button>
+              <button
+                class="btn btn-outline-light btn-sm me-2"
+                title="Emergency"
+              >
+                <i class="bi bi-exclamation-triangle"></i>
+              </button>
+              <a
+                href="index.html"
+                class="btn btn-danger btn-sm"
+                title="Exit Admin"
+              >
+                <i class="bi bi-power"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="admin-main">
+      <!-- Breadcrumb Navigation -->
+      <div class="admin-breadcrumb">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                  <i class="bi bi-house me-1"></i>Admin
+                </li>
+                <li class="breadcrumb-item active" id="currentBreadcrumb">
+                  Dashboard
+                </li>
+              </ol>
+            </nav>
+            <h2 class="admin-page-title mb-0" id="pageTitle">
+              System Dashboard
+            </h2>
+            <p class="admin-page-subtitle text-muted mb-0" id="pageSubtitle">
+              Real-time overview of BiTS Connect platform
+            </p>
+          </div>
+          <div class="admin-actions">
+            <button
+              class="btn btn-outline-primary me-2"
+              onclick="refreshData()"
+            >
+              <i class="bi bi-arrow-clockwise me-2"></i>Refresh
+            </button>
+            <div class="dropdown">
+              <button
+                class="btn btn-primary dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+              >
+                <i class="bi bi-plus-lg me-2"></i>Quick Actions
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="showSection('users')"
+                    ><i class="bi bi-person-plus me-2"></i>Add User</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="showSection('courses')"
+                    ><i class="bi bi-journal-plus me-2"></i>Create Course</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="showSection('library')"
+                    ><i class="bi bi-upload me-2"></i>Upload Resource</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="showSection('system')"
+                    ><i class="bi bi-gear me-2"></i>System Settings</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Container -->
+      <div class="admin-content">
+        <!-- Dashboard Section -->
+        <div id="dashboard-section" class="content-section active">
+          <!-- Alert Bar -->
+          <div
+            class="alert alert-warning alert-dismissible fade show mb-4"
+            role="alert"
+          >
+            <i class="bi bi-exclamation-triangle me-2"></i>
+            <strong>System Maintenance:</strong> Scheduled maintenance window on
+            Sunday 3:00 AM - 5:00 AM EAT.
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+            ></button>
+          </div>
+
+          <!-- Key Metrics Grid -->
+          <div class="row g-4 mb-4">
+            <!-- Educational Metrics -->
+            <div class="col-xl-3 col-lg-6">
+              <div class="metric-card metric-primary">
+                <div class="metric-header">
+                  <h6 class="metric-title">TOTAL ENROLLMENT</h6>
+                  <div class="metric-trend trend-up">↗ +8.3%</div>
+                </div>
+                <div class="metric-body">
+                  <div class="metric-number">335</div>
+                  <div class="metric-subtitle">Active students</div>
+                </div>
+                <div class="metric-footer">
+                  <div class="row text-center">
+                    <div class="col-4">
+                      <div class="fw-bold">180</div>
+                      <small>Undergrad</small>
+                    </div>
+                    <div class="col-4">
+                      <div class="fw-bold">130</div>
+                      <small>Graduate</small>
+                    </div>
+                    <div class="col-4">
+                      <div class="fw-bold">25</div>
+                      <small>New</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-6">
+              <div class="metric-card metric-success">
+                <div class="metric-header">
+                  <h6 class="metric-title">ACADEMIC PERFORMANCE</h6>
+                  <div class="metric-trend trend-up">↗ IMPROVING</div>
+                </div>
+                <div class="metric-body">
+                  <div class="metric-number">3.42</div>
+                  <div class="metric-subtitle">Average GPA</div>
+                </div>
+                <div class="metric-footer">
+                  <div class="d-flex justify-content-between">
+                    <small>Pass Rate: 92%</small>
+                    <small>Dean's List: 15%</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-6">
+              <div class="metric-card metric-info">
+                <div class="metric-header">
+                  <h6 class="metric-title">FACULTY STATUS</h6>
+                  <div class="metric-trend trend-stable">● ACTIVE</div>
+                </div>
+                <div class="metric-body">
+                  <div class="metric-number">42</div>
+                  <div class="metric-subtitle">Teaching staff</div>
+                </div>
+                <div class="metric-footer">
+                  <div class="row text-center">
+                    <div class="col-4">
+                      <div class="fw-bold">12</div>
+                      <small>Professors</small>
+                    </div>
+                    <div class="col-4">
+                      <div class="fw-bold">18</div>
+                      <small>Lecturers</small>
+                    </div>
+                    <div class="col-4">
+                      <div class="fw-bold">12</div>
+                      <small>Assistants</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-6">
+              <div class="metric-card metric-warning">
+                <div class="metric-header">
+                  <h6 class="metric-title">PENDING ACTIONS</h6>
+                  <div class="metric-trend trend-alert">
+                    ⚠ REQUIRES ATTENTION
+                  </div>
+                </div>
+                <div class="metric-body">
+                  <div class="metric-number">12</div>
+                  <div class="metric-subtitle">Items pending</div>
+                </div>
+                <div class="metric-footer">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <small>Admissions: 8 | Appeals: 4</small>
+                    <button class="btn btn-outline-warning btn-sm">
+                      <i class="bi bi-eye"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Real-time Monitoring Grid -->
+          <div class="row g-4 mb-4">
+            <div class="col-lg-4">
+              <div class="card border-0 shadow-sm">
+                <div class="card-header bg-dark text-white">
+                  <h6 class="mb-0">
+                    <i class="bi bi-activity me-2"></i>Live Activity Feed
+                  </h6>
+                </div>
+                <div
+                  class="card-body p-0"
+                  style="height: 300px; overflow-y: auto"
+                >
+                  <div id="liveActivityFeed">
+                    <!-- Live feed items will be populated here -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-8">
+              <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <h6 class="mb-0">Platform Analytics</h6>
+                    <div class="btn-group btn-group-sm" role="group">
+                      <input
+                        type="radio"
+                        class="btn-check"
+                        name="timeframe"
+                        id="today"
+                        checked
+                      />
+                      <label class="btn btn-outline-secondary" for="today"
+                        >Today</label
+                      >
+                      <input
+                        type="radio"
+                        class="btn-check"
+                        name="timeframe"
+                        id="week"
+                      />
+                      <label class="btn btn-outline-secondary" for="week"
+                        >Week</label
+                      >
+                      <input
+                        type="radio"
+                        class="btn-check"
+                        name="timeframe"
+                        id="month"
+                      />
+                      <label class="btn btn-outline-secondary" for="month"
+                        >Month</label
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <canvas id="adminAnalyticsChart" height="250"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- System Overview and Critical Alerts -->
+          <div class="row g-4 mb-4">
+            <div class="col-lg-6">
+              <div class="card border-0 shadow-sm">
+                <div class="card-header bg-danger text-white">
+                  <h6 class="mb-0">
+                    <i class="bi bi-exclamation-triangle me-2"></i>Critical
+                    Alerts & Issues
+                  </h6>
+                </div>
+                <div class="card-body">
+                  <div class="alert-list">
+                    <div class="alert-item severity-high">
+                      <div class="d-flex align-items-start">
+                        <i
+                          class="bi bi-shield-exclamation text-danger me-3 mt-1"
+                        ></i>
+                        <div class="flex-grow-1">
+                          <h6 class="mb-1">
+                            Security: Multiple Failed Login Attempts
+                          </h6>
+                          <p class="mb-1 text-muted small">
+                            IP: 192.168.1.45 (15 attempts)
+                          </p>
+                          <small class="text-muted">2 minutes ago</small>
+                        </div>
+                        <button class="btn btn-outline-danger btn-sm">
+                          Block
+                        </button>
+                      </div>
+                    </div>
+                    <div class="alert-item severity-medium">
+                      <div class="d-flex align-items-start">
+                        <i class="bi bi-cpu text-warning me-3 mt-1"></i>
+                        <div class="flex-grow-1">
+                          <h6 class="mb-1">System: High CPU Usage</h6>
+                          <p class="mb-1 text-muted small">
+                            Database server at 85% utilization
+                          </p>
+                          <small class="text-muted">5 minutes ago</small>
+                        </div>
+                        <button class="btn btn-outline-warning btn-sm">
+                          Monitor
+                        </button>
+                      </div>
+                    </div>
+                    <div class="alert-item severity-low">
+                      <div class="d-flex align-items-start">
+                        <i class="bi bi-hdd text-info me-3 mt-1"></i>
+                        <div class="flex-grow-1">
+                          <h6 class="mb-1">Storage: Backup Completed</h6>
+                          <p class="mb-1 text-muted small">
+                            Daily backup successful (2.3GB)
+                          </p>
+                          <small class="text-muted">1 hour ago</small>
+                        </div>
+                        <button class="btn btn-outline-success btn-sm">
+                          ✓
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="card border-0 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                  <h6 class="mb-0">
+                    <i class="bi bi-gear me-2"></i>System Status Overview
+                  </h6>
+                </div>
+                <div class="card-body">
+                  <div class="system-status">
+                    <div class="status-item">
+                      <div
+                        class="d-flex justify-content-between align-items-center mb-2"
+                      >
+                        <span>Database Server</span>
+                        <span class="badge bg-success">ONLINE</span>
+                      </div>
+                      <div class="progress progress-sm mb-3">
+                        <div
+                          class="progress-bar bg-success"
+                          style="width: 92%"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="status-item">
+                      <div
+                        class="d-flex justify-content-between align-items-center mb-2"
+                      >
+                        <span>Application Server</span>
+                        <span class="badge bg-success">ONLINE</span>
+                      </div>
+                      <div class="progress progress-sm mb-3">
+                        <div
+                          class="progress-bar bg-success"
+                          style="width: 87%"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="status-item">
+                      <div
+                        class="d-flex justify-content-between align-items-center mb-2"
+                      >
+                        <span>File Storage</span>
+                        <span class="badge bg-warning">HIGH USAGE</span>
+                      </div>
+                      <div class="progress progress-sm mb-3">
+                        <div
+                          class="progress-bar bg-warning"
+                          style="width: 78%"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="status-item">
+                      <div
+                        class="d-flex justify-content-between align-items-center mb-2"
+                      >
+                        <span>CDN Network</span>
+                        <span class="badge bg-success">OPTIMAL</span>
+                      </div>
+                      <div class="progress progress-sm mb-3">
+                        <div
+                          class="progress-bar bg-success"
+                          style="width: 95%"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="text-center mt-3">
+                      <button class="btn btn-outline-primary btn-sm me-2">
+                        <i class="bi bi-arrow-clockwise"></i> Refresh Status
+                      </button>
+                      <button class="btn btn-outline-secondary btn-sm">
+                        <i class="bi bi-gear"></i> Configure
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Activity -->
+          <div class="row g-4">
+            <div class="col-lg-8">
+              <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <h5 class="mb-0">Recent System Activity</h5>
+                    <a href="#" class="btn btn-sm btn-outline-primary"
+                      >View All</a
+                    >
+                  </div>
+                </div>
+                <div class="card-body p-0">
+                  <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                      <thead class="table-light">
+                        <tr>
+                          <th>Time</th>
+                          <th>User</th>
+                          <th>Action</th>
+                          <th>Details</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody id="recentActivityTable">
+                        <!-- Activity rows will be populated here -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                  <h5 class="mb-0">Quick Actions</h5>
+                </div>
+                <div class="card-body">
+                  <div class="d-grid gap-2">
+                    <button
+                      class="btn btn-primary"
+                      data-bs-toggle="modal"
+                      data-bs-target="#addUserModal"
+                    >
+                      <i class="bi bi-person-plus me-2"></i>Add New User
+                    </button>
+                    <button
+                      class="btn btn-success"
+                      data-bs-toggle="modal"
+                      data-bs-target="#addCourseModal"
+                    >
+                      <i class="bi bi-plus-circle me-2"></i>Create Course
+                    </button>
+                    <button
+                      class="btn btn-info"
+                      onclick="showSection('library')"
+                    >
+                      <i class="bi bi-upload me-2"></i>Upload Resource
+                    </button>
+                    <button
+                      class="btn btn-warning"
+                      onclick="showSection('system')"
+                    >
+                      <i class="bi bi-gear me-2"></i>System Settings
+                    </button>
+                    <button
+                      class="btn btn-secondary"
+                      onclick="generateReport()"
+                    >
+                      <i class="bi bi-file-earmark-pdf me-2"></i>Generate Report
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Users Section -->
+        <div id="users-section" class="content-section">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+              <h4>User Management</h4>
+              <p class="text-muted mb-0">
+                Manage students, teachers, and administrators
+              </p>
+            </div>
+            <button
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#addUserModal"
+            >
+              <i class="bi bi-person-plus me-2"></i>Add User
+            </button>
+          </div>
+
+          <!-- User Filters -->
+          <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+              <div class="row g-3">
+                <div class="col-md-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Search users..."
+                    id="userSearch"
+                  />
+                </div>
+                <div class="col-md-2">
+                  <select class="form-select" id="roleFilter">
+                    <option value="">All Roles</option>
+                    <option value="student">Students</option>
+                    <option value="teacher">Teachers</option>
+                    <option value="admin">Administrators</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <select class="form-select" id="statusFilter">
+                    <option value="">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                    <option value="suspended">Suspended</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <select class="form-select" id="programFilter">
+                    <option value="">All Programs</option>
+                    <option value="software_engineering">
+                      Software Engineering
+                    </option>
+                    <option value="it_systems">IT Systems</option>
+                    <option value="it_management">IT Management</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <div class="btn-group w-100" role="group">
+                    <button
+                      class="btn btn-outline-secondary"
+                      onclick="exportUsers()"
+                    >
+                      <i class="bi bi-download me-1"></i>Export
+                    </button>
+                    <button
+                      class="btn btn-outline-secondary"
+                      onclick="refreshUsers()"
+                    >
+                      <i class="bi bi-arrow-clockwise me-1"></i>Refresh
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Users Table -->
+          <div class="card border-0 shadow-sm">
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th>
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          id="selectAll"
+                        />
+                      </th>
+                      <th>User</th>
+                      <th>Role</th>
+                      <th>Program</th>
+                      <th>Status</th>
+                      <th>Last Active</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="usersTable">
+                    <!-- User rows will be populated here -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Other sections will be added here -->
+        <div id="courses-section" class="content-section">
+          <h4>Courses & Programs Management</h4>
+          <p class="text-muted">
+            Content for courses management will be here...
+          </p>
+        </div>
+
+        <div id="content-section" class="content-section">
+          <h4>Content Management</h4>
+          <p class="text-muted">Content management tools will be here...</p>
+        </div>
+
+        <div id="library-section" class="content-section">
+          <h4>Digital Library Management</h4>
+          <p class="text-muted">Library resource management will be here...</p>
+        </div>
+
+        <div id="analytics-section" class="content-section">
+          <h4>Analytics & Reports</h4>
+          <p class="text-muted">
+            Detailed analytics and reporting tools will be here...
+          </p>
+        </div>
+
+        <div id="system-section" class="content-section">
+          <h4>System Settings</h4>
+          <p class="text-muted">System configuration options will be here...</p>
+        </div>
+
+        <div id="logs-section" class="content-section">
+          <h4>Activity Logs</h4>
+          <p class="text-muted">Detailed system logs will be here...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div class="modal fade" id="addUserModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add New User</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="addUserForm">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="newUserName" class="form-label">Full Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="newUserName"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="newUserEmail" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="newUserEmail"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="newUserRole" class="form-label">Role</label>
+                  <select class="form-select" id="newUserRole" required>
+                    <option value="">Select Role</option>
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="admin">Administrator</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="newUserProgram" class="form-label">Program</label>
+                  <select class="form-select" id="newUserProgram">
+                    <option value="">Select Program</option>
+                    <option value="software_engineering">
+                      Software Engineering
+                    </option>
+                    <option value="it_systems">IT Systems</option>
+                    <option value="it_management">IT Management</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="newUserPhone" class="form-label">Phone</label>
+                  <input type="tel" class="form-control" id="newUserPhone" />
+                </div>
+                <div class="col-md-6">
+                  <label for="newUserStatus" class="form-label">Status</label>
+                  <select class="form-select" id="newUserStatus" required>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="sendWelcomeEmail"
+                      checked
+                    />
+                    <label class="form-check-label" for="sendWelcomeEmail">
+                      Send welcome email with login credentials
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-primary">
+                  <i class="bi bi-person-plus me-2"></i>Create User
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/admin-dashboard.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teacher Dashboard - BiTS Connect</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link href="assets/css/custom.css" rel="stylesheet" />
+  </head>
+  <body class="bg-light">
+    <!-- Navigation -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-white sticky-top border-bottom shadow-sm"
+      id="mainNav"
+    >
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+          <div class="bg-primary rounded me-2 p-2">
+            <i class="bi bi-book text-white"></i>
+          </div>
+          <span class="fw-bold">BiTS Connect</span>
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="teacher-dashboard.html">
+                <i class="bi bi-speedometer2 me-1"></i>Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="library.html">
+                <i class="bi bi-book me-1"></i>Digital Library
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="messaging.html">
+                <i class="bi bi-chat-dots me-1"></i>Messages
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">
+                <i class="bi bi-info-circle me-1"></i>About
+              </a>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center">
+            <div class="dropdown me-3">
+              <button
+                class="btn btn-outline-success btn-sm dropdown-toggle"
+                data-bs-toggle="dropdown"
+              >
+                <i class="bi bi-bell me-1"></i>
+                <span class="badge bg-danger">3</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><h6 class="dropdown-header">Notifications</h6></li>
+                <li>
+                  <a class="dropdown-item" href="#"
+                    ><i class="bi bi-file-earmark-text me-2"></i>New submission
+                    from Hirut</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#"
+                    ><i class="bi bi-chat-dots me-2"></i>2 new messages</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#"
+                    ><i class="bi bi-calendar me-2"></i>Class reminder:
+                    SE-401</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <span class="me-3">
+              <i class="bi bi-person me-1"></i>
+              <span id="userName">Aymen Abrar</span>
+              <small class="text-muted">(Teacher)</small>
+              <span id="demoIndicator" class="badge bg-warning ms-2">Demo</span>
+            </span>
+            <button class="btn btn-outline-secondary" onclick="logout()">
+              <i class="bi bi-box-arrow-right me-1"></i>Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid py-4">
+      <!-- Header -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h1 class="h3 mb-1">
+                Welcome back, <span id="teacherName">Aymen</span>!
+              </h1>
+              <p class="text-muted mb-0">
+                Manage your courses, students, and assignments
+              </p>
+            </div>
+            <div class="d-flex gap-2">
+              <button
+                class="btn btn-outline-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#uploadMaterialModal"
+              >
+                <i class="bi bi-upload me-2"></i>Upload Material
+              </button>
+              <button
+                class="btn btn-outline-success"
+                data-bs-toggle="modal"
+                data-bs-target="#addAssignmentModal"
+              >
+                <i class="bi bi-plus-lg me-2"></i>New Assignment
+              </button>
+              <button
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#gradeStudentModal"
+              >
+                <i class="bi bi-award me-2"></i>Grade Students
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Teacher Overview Cards -->
+      <div class="row g-4 mb-4">
+        <div class="col-lg-3 col-md-6">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="bg-primary bg-opacity-10 rounded p-3 me-3">
+                  <i class="bi bi-journal-bookmark text-primary h4 mb-0"></i>
+                </div>
+                <div>
+                  <div class="h4 mb-0" id="totalCourses">4</div>
+                  <small class="text-muted">My Courses</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="bg-success bg-opacity-10 rounded p-3 me-3">
+                  <i class="bi bi-people text-success h4 mb-0"></i>
+                </div>
+                <div>
+                  <div class="h4 mb-0" id="totalStudents">127</div>
+                  <small class="text-muted">Total Students</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="bg-warning bg-opacity-10 rounded p-3 me-3">
+                  <i class="bi bi-file-earmark-text text-warning h4 mb-0"></i>
+                </div>
+                <div>
+                  <div class="h4 mb-0" id="pendingGrading">23</div>
+                  <small class="text-muted">Pending Grading</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="bg-info bg-opacity-10 rounded p-3 me-3">
+                  <i class="bi bi-calendar-event text-info h4 mb-0"></i>
+                </div>
+                <div>
+                  <div class="h4 mb-0" id="upcomingClasses">8</div>
+                  <small class="text-muted">This Week's Classes</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <!-- My Courses -->
+        <div class="col-lg-8">
+          <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-bottom-0">
+              <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">My Courses</h5>
+                <button
+                  class="btn btn-sm btn-outline-primary"
+                  onclick="exportReports()"
+                >
+                  <i class="bi bi-download me-1"></i>Export Reports
+                </button>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Course</th>
+                      <th>Students</th>
+                      <th>Pending</th>
+                      <th>Performance</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="coursesTable">
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <div
+                            class="bg-primary bg-opacity-10 rounded p-2 me-3"
+                          >
+                            <i class="bi bi-code-slash text-primary"></i>
+                          </div>
+                          <div>
+                            <div class="fw-semibold">SE-401</div>
+                            <small class="text-muted"
+                              >Software Engineering</small
+                            >
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <span class="fw-semibold">45</span>
+                        <small class="text-muted d-block">enrolled</small>
+                      </td>
+                      <td>
+                        <span class="badge bg-warning">8</span>
+                        <small class="text-muted d-block">to grade</small>
+                      </td>
+                      <td>
+                        <div class="progress" style="height: 6px">
+                          <div
+                            class="progress-bar bg-success"
+                            style="width: 85%"
+                          ></div>
+                        </div>
+                        <small class="text-muted">85% avg</small>
+                      </td>
+                      <td>
+                        <div class="btn-group btn-group-sm">
+                          <button
+                            class="btn btn-outline-primary"
+                            onclick="manageCourse('SE-401')"
+                          >
+                            <i class="bi bi-gear"></i>
+                          </button>
+                          <button
+                            class="btn btn-outline-success"
+                            onclick="viewStudents('SE-401')"
+                          >
+                            <i class="bi bi-people"></i>
+                          </button>
+                          <button
+                            class="btn btn-outline-info"
+                            onclick="uploadContent('SE-401')"
+                          >
+                            <i class="bi bi-upload"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <div
+                            class="bg-success bg-opacity-10 rounded p-2 me-3"
+                          >
+                            <i class="bi bi-database text-success"></i>
+                          </div>
+                          <div>
+                            <div class="fw-semibold">DB-301</div>
+                            <small class="text-muted">Database Systems</small>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <span class="fw-semibold">38</span>
+                        <small class="text-muted d-block">enrolled</small>
+                      </td>
+                      <td>
+                        <span class="badge bg-warning">6</span>
+                        <small class="text-muted d-block">to grade</small>
+                      </td>
+                      <td>
+                        <div class="progress" style="height: 6px">
+                          <div
+                            class="progress-bar bg-success"
+                            style="width: 78%"
+                          ></div>
+                        </div>
+                        <small class="text-muted">78% avg</small>
+                      </td>
+                      <td>
+                        <div class="btn-group btn-group-sm">
+                          <button
+                            class="btn btn-outline-primary"
+                            onclick="manageCourse('DB-301')"
+                          >
+                            <i class="bi bi-gear"></i>
+                          </button>
+                          <button
+                            class="btn btn-outline-success"
+                            onclick="viewStudents('DB-301')"
+                          >
+                            <i class="bi bi-people"></i>
+                          </button>
+                          <button
+                            class="btn btn-outline-info"
+                            onclick="uploadContent('DB-301')"
+                          >
+                            <i class="bi bi-upload"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <div class="bg-info bg-opacity-10 rounded p-2 me-3">
+                            <i class="bi bi-wifi text-info"></i>
+                          </div>
+                          <div>
+                            <div class="fw-semibold">NET-201</div>
+                            <small class="text-muted">Computer Networks</small>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <span class="fw-semibold">32</span>
+                        <small class="text-muted d-block">enrolled</small>
+                      </td>
+                      <td>
+                        <span class="badge bg-warning">5</span>
+                        <small class="text-muted d-block">to grade</small>
+                      </td>
+                      <td>
+                        <div class="progress" style="height: 6px">
+                          <div
+                            class="progress-bar bg-success"
+                            style="width: 82%"
+                          ></div>
+                        </div>
+                        <small class="text-muted">82% avg</small>
+                      </td>
+                      <td>
+                        <div class="btn-group btn-group-sm">
+                          <button
+                            class="btn btn-outline-primary"
+                            onclick="manageCourse('NET-201')"
+                          >
+                            <i class="bi bi-gear"></i>
+                          </button>
+                          <button
+                            class="btn btn-outline-success"
+                            onclick="viewStudents('NET-201')"
+                          >
+                            <i class="bi bi-people"></i>
+                          </button>
+                          <button
+                            class="btn btn-outline-info"
+                            onclick="uploadContent('NET-201')"
+                          >
+                            <i class="bi bi-upload"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <div
+                            class="bg-warning bg-opacity-10 rounded p-2 me-3"
+                          >
+                            <i class="bi bi-cpu text-warning"></i>
+                          </div>
+                          <div>
+                            <div class="fw-semibold">AI-301</div>
+                            <small class="text-muted"
+                              >Artificial Intelligence</small
+                            >
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <span class="fw-semibold">12</span>
+                        <small class="text-muted d-block">enrolled</small>
+                      </td>
+                      <td>
+                        <span class="badge bg-warning">4</span>
+                        <small class="text-muted d-block">to grade</small>
+                      </td>
+                      <td>
+                        <div class="progress" style="height: 6px">
+                          <div
+                            class="progress-bar bg-success"
+                            style="width: 90%"
+                          ></div>
+                        </div>
+                        <small class="text-muted">90% avg</small>
+                      </td>
+                      <td>
+                        <div class="btn-group btn-group-sm">
+                          <button
+                            class="btn btn-outline-primary"
+                            onclick="manageCourse('AI-301')"
+                          >
+                            <i class="bi bi-gear"></i>
+                          </button>
+                          <button
+                            class="btn btn-outline-success"
+                            onclick="viewStudents('AI-301')"
+                          >
+                            <i class="bi bi-people"></i>
+                          </button>
+                          <button
+                            class="btn btn-outline-info"
+                            onclick="uploadContent('AI-301')"
+                          >
+                            <i class="bi bi-upload"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions & Widgets -->
+        <div class="col-lg-4">
+          <!-- Quick Actions -->
+          <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-white border-bottom-0">
+              <h6 class="mb-0">Quick Actions</h6>
+            </div>
+            <div class="card-body">
+              <div class="d-grid gap-2">
+                <button
+                  class="btn btn-outline-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#uploadMaterialModal"
+                >
+                  <i class="bi bi-upload me-2"></i>Upload Lecture Notes
+                </button>
+                <button
+                  class="btn btn-outline-success"
+                  data-bs-toggle="modal"
+                  data-bs-target="#createQuizModal"
+                >
+                  <i class="bi bi-question-circle me-2"></i>Create Quiz
+                </button>
+                <button
+                  class="btn btn-outline-info"
+                  data-bs-toggle="modal"
+                  data-bs-target="#scheduleSessionModal"
+                >
+                  <i class="bi bi-calendar-plus me-2"></i>Schedule Session
+                </button>
+                <button
+                  class="btn btn-outline-warning"
+                  onclick="sendAnnouncement()"
+                >
+                  <i class="bi bi-megaphone me-2"></i>Send Announcement
+                </button>
+                <button
+                  class="btn btn-outline-secondary"
+                  onclick="exportReports()"
+                >
+                  <i class="bi bi-file-earmark-pdf me-2"></i>Export Reports
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Upcoming Classes -->
+          <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-white border-bottom-0">
+              <h6 class="mb-0">Today's Schedule</h6>
+            </div>
+            <div class="card-body">
+              <div class="list-group list-group-flush">
+                <div
+                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0"
+                >
+                  <div>
+                    <div class="fw-semibold">SE-401</div>
+                    <small class="text-muted">10:00 AM - Room 201</small>
+                  </div>
+                  <span class="badge bg-primary">Next</span>
+                </div>
+                <div
+                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0"
+                >
+                  <div>
+                    <div class="fw-semibold">DB-301</div>
+                    <small class="text-muted">2:00 PM - Room 105</small>
+                  </div>
+                  <span class="badge bg-outline-secondary">Later</span>
+                </div>
+                <div
+                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0"
+                >
+                  <div>
+                    <div class="fw-semibold">Office Hours</div>
+                    <small class="text-muted">4:00 PM - Office 301</small>
+                  </div>
+                  <span class="badge bg-outline-info">Open</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Messages -->
+          <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-bottom-0">
+              <div class="d-flex justify-content-between align-items-center">
+                <h6 class="mb-0">Recent Messages</h6>
+                <a href="messaging.html" class="btn btn-sm btn-outline-primary"
+                  >View All</a
+                >
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="list-group list-group-flush">
+                <div
+                  class="list-group-item d-flex align-items-start border-0 px-0"
+                >
+                  <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+                    <i class="bi bi-person text-primary"></i>
+                  </div>
+                  <div class="flex-grow-1">
+                    <div class="d-flex justify-content-between">
+                      <h6 class="mb-1">Abenezer Bekele</h6>
+                      <small class="text-muted">2m ago</small>
+                    </div>
+                    <p class="mb-1 small">
+                      Question about the SE-401 assignment...
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="list-group-item d-flex align-items-start border-0 px-0"
+                >
+                  <div class="bg-success bg-opacity-10 rounded-circle p-2 me-3">
+                    <i class="bi bi-person text-success"></i>
+                  </div>
+                  <div class="flex-grow-1">
+                    <div class="d-flex justify-content-between">
+                      <h6 class="mb-1">Biruk Gebre</h6>
+                      <small class="text-muted">1h ago</small>
+                    </div>
+                    <p class="mb-1 small">
+                      Submitted DB-301 project for review
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Performance Analytics -->
+      <div class="row g-4 mt-4">
+        <div class="col-lg-6">
+          <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-bottom-0">
+              <h6 class="mb-0">Student Performance Analytics</h6>
+            </div>
+            <div class="card-body">
+              <canvas id="performanceChart" height="200"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-bottom-0">
+              <h6 class="mb-0">Assignment Submission Trends</h6>
+            </div>
+            <div class="card-body">
+              <canvas id="submissionChart" height="200"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pending Submissions -->
+      <div class="row g-4 mt-4">
+        <div class="col-12">
+          <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-bottom-0">
+              <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Pending Grading (23 items)</h5>
+                <div class="btn-group">
+                  <button
+                    class="btn btn-sm btn-outline-primary"
+                    onclick="gradeSelected()"
+                  >
+                    <i class="bi bi-check2-square me-1"></i>Grade Selected
+                  </button>
+                  <button class="btn btn-sm btn-primary" onclick="approveAll()">
+                    <i class="bi bi-check-all me-1"></i>Approve All
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th>
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          id="selectAllSubmissions"
+                        />
+                      </th>
+                      <th>Student</th>
+                      <th>Course</th>
+                      <th>Assignment</th>
+                      <th>Submitted</th>
+                      <th>Due Date</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="pendingSubmissionsTable">
+                    <tr>
+                      <td>
+                        <input
+                          type="checkbox"
+                          class="form-check-input submission-check"
+                          value="1"
+                        />
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <div
+                            class="bg-primary bg-opacity-10 rounded-circle p-2 me-3"
+                          >
+                            <i class="bi bi-person text-primary"></i>
+                          </div>
+                          <div>
+                            <div class="fw-semibold">Abenezer Bekele</div>
+                            <small class="text-muted">0998/24</small>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <span class="badge bg-primary">SE-401</span>
+                      </td>
+                      <td>Design Patterns Project</td>
+                      <td>
+                        <small class="text-success">2 hours ago</small>
+                      </td>
+                      <td>
+                        <small class="text-muted">Dec 15, 2024</small>
+                      </td>
+                      <td>
+                        <div class="btn-group btn-group-sm">
+                          <button
+                            class="btn btn-outline-primary"
+                            onclick="viewSubmission(1)"
+                          >
+                            <i class="bi bi-eye"></i>
+                          </button>
+                          <button
+                            class="btn btn-outline-success"
+                            onclick="gradeSubmission(1)"
+                          >
+                            <i class="bi bi-award"></i>
+                          </button>
+                          <button
+                            class="btn btn-outline-info"
+                            onclick="provideFeedback(1)"
+                          >
+                            <i class="bi bi-chat-text"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input
+                          type="checkbox"
+                          class="form-check-input submission-check"
+                          value="2"
+                        />
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <div
+                            class="bg-success bg-opacity-10 rounded-circle p-2 me-3"
+                          >
+                            <i class="bi bi-person text-success"></i>
+                          </div>
+                          <div>
+                            <div class="fw-semibold">Biruk Gebre</div>
+                            <small class="text-muted">0113/24</small>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <span class="badge bg-success">DB-301</span>
+                      </td>
+                      <td>Database Optimization</td>
+                      <td>
+                        <small class="text-success">1 day ago</small>
+                      </td>
+                      <td>
+                        <small class="text-muted">Dec 14, 2024</small>
+                      </td>
+                      <td>
+                        <div class="btn-group btn-group-sm">
+                          <button
+                            class="btn btn-outline-primary"
+                            onclick="viewSubmission(2)"
+                          >
+                            <i class="bi bi-eye"></i>
+                          </button>
+                          <button
+                            class="btn btn-outline-success"
+                            onclick="gradeSubmission(2)"
+                          >
+                            <i class="bi bi-award"></i>
+                          </button>
+                          <button
+                            class="btn btn-outline-info"
+                            onclick="provideFeedback(2)"
+                          >
+                            <i class="bi bi-chat-text"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upload Material Modal -->
+    <div class="modal fade" id="uploadMaterialModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Upload Course Material</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="uploadMaterialForm">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="materialCourse" class="form-label">Course</label>
+                  <select class="form-select" id="materialCourse" required>
+                    <option value="">Select Course</option>
+                    <option value="SE-401">
+                      SE-401 - Software Engineering
+                    </option>
+                    <option value="DB-301">DB-301 - Database Systems</option>
+                    <option value="NET-201">NET-201 - Computer Networks</option>
+                    <option value="AI-301">
+                      AI-301 - Artificial Intelligence
+                    </option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="materialType" class="form-label"
+                    >Material Type</label
+                  >
+                  <select class="form-select" id="materialType" required>
+                    <option value="">Select Type</option>
+                    <option value="lecture">Lecture Notes</option>
+                    <option value="assignment">Assignment</option>
+                    <option value="tutorial">Tutorial</option>
+                    <option value="reference">Reference Material</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label for="materialTitle" class="form-label">Title</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="materialTitle"
+                    required
+                  />
+                </div>
+                <div class="col-12">
+                  <label for="materialDescription" class="form-label"
+                    >Description</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="materialDescription"
+                    rows="3"
+                  ></textarea>
+                </div>
+                <div class="col-12">
+                  <label for="materialFile" class="form-label"
+                    >File Upload</label
+                  >
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="materialFile"
+                    multiple
+                    accept=".pdf,.doc,.docx,.ppt,.pptx"
+                  />
+                  <div class="form-text">
+                    Supported formats: PDF, DOC, DOCX, PPT, PPTX
+                  </div>
+                </div>
+              </div>
+              <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-primary">
+                  <i class="bi bi-upload me-2"></i>Upload Material
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Assignment Modal -->
+    <div class="modal fade" id="addAssignmentModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Create New Assignment</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="addAssignmentForm">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="assignmentCourse" class="form-label"
+                    >Course</label
+                  >
+                  <select class="form-select" id="assignmentCourse" required>
+                    <option value="">Select Course</option>
+                    <option value="SE-401">
+                      SE-401 - Software Engineering
+                    </option>
+                    <option value="DB-301">DB-301 - Database Systems</option>
+                    <option value="NET-201">NET-201 - Computer Networks</option>
+                    <option value="AI-301">
+                      AI-301 - Artificial Intelligence
+                    </option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="assignmentPoints" class="form-label"
+                    >Total Points</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="assignmentPoints"
+                    min="1"
+                    max="100"
+                    value="100"
+                  />
+                </div>
+                <div class="col-12">
+                  <label for="assignmentTitle" class="form-label"
+                    >Assignment Title</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="assignmentTitle"
+                    required
+                  />
+                </div>
+                <div class="col-12">
+                  <label for="assignmentDescription" class="form-label"
+                    >Description & Instructions</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="assignmentDescription"
+                    rows="4"
+                    required
+                  ></textarea>
+                </div>
+                <div class="col-md-6">
+                  <label for="assignmentDueDate" class="form-label"
+                    >Due Date</label
+                  >
+                  <input
+                    type="datetime-local"
+                    class="form-control"
+                    id="assignmentDueDate"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="assignmentType" class="form-label"
+                    >Assignment Type</label
+                  >
+                  <select class="form-select" id="assignmentType" required>
+                    <option value="individual">Individual</option>
+                    <option value="group">Group Project</option>
+                    <option value="quiz">Quiz/Test</option>
+                    <option value="presentation">Presentation</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="allowLateSubmission"
+                    />
+                    <label class="form-check-label" for="allowLateSubmission">
+                      Allow late submissions (with penalty)
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-success">
+                  <i class="bi bi-plus-lg me-2"></i>Create Assignment
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grade Student Modal -->
+    <div class="modal fade" id="gradeStudentModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Grade Submission</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="gradeStudentForm">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="gradeStudent" class="form-label">Student</label>
+                  <select class="form-select" id="gradeStudent" required>
+                    <option value="">Select Student</option>
+                    <option value="abenezer">
+                      Abenezer Bekele - Design Patterns Project
+                    </option>
+                    <option value="biruk">
+                      Biruk Gebre - Database Optimization
+                    </option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="gradeScore" class="form-label"
+                    >Score (out of 100)</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="gradeScore"
+                    min="0"
+                    max="100"
+                    required
+                  />
+                </div>
+                <div class="col-12">
+                  <label for="gradeFeedback" class="form-label">Feedback</label>
+                  <textarea
+                    class="form-control"
+                    id="gradeFeedback"
+                    rows="4"
+                    placeholder="Provide constructive feedback to the student..."
+                  ></textarea>
+                </div>
+                <div class="col-12">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="notifyStudent"
+                      checked
+                    />
+                    <label class="form-check-label" for="notifyStudent">
+                      Send notification to student
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-primary">
+                  <i class="bi bi-award me-2"></i>Submit Grade
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Quiz Modal -->
+    <div class="modal fade" id="createQuizModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Create Quiz/Assessment</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="createQuizForm">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="quizCourse" class="form-label">Course</label>
+                  <select class="form-select" id="quizCourse" required>
+                    <option value="">Select Course</option>
+                    <option value="SE-401">
+                      SE-401 - Software Engineering
+                    </option>
+                    <option value="DB-301">DB-301 - Database Systems</option>
+                    <option value="NET-201">NET-201 - Computer Networks</option>
+                    <option value="AI-301">
+                      AI-301 - Artificial Intelligence
+                    </option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="quizDuration" class="form-label"
+                    >Duration (minutes)</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="quizDuration"
+                    min="5"
+                    max="180"
+                    value="60"
+                  />
+                </div>
+                <div class="col-12">
+                  <label for="quizTitle" class="form-label">Quiz Title</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="quizTitle"
+                    required
+                  />
+                </div>
+                <div class="col-12">
+                  <label for="quizInstructions" class="form-label"
+                    >Instructions</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="quizInstructions"
+                    rows="3"
+                  ></textarea>
+                </div>
+                <div class="col-md-6">
+                  <label for="quizStartDate" class="form-label"
+                    >Available From</label
+                  >
+                  <input
+                    type="datetime-local"
+                    class="form-control"
+                    id="quizStartDate"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="quizEndDate" class="form-label"
+                    >Available Until</label
+                  >
+                  <input
+                    type="datetime-local"
+                    class="form-control"
+                    id="quizEndDate"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-success">
+                  <i class="bi bi-question-circle me-2"></i>Create Quiz
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Schedule Session Modal -->
+    <div class="modal fade" id="scheduleSessionModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Schedule Online Session</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="scheduleSessionForm">
+              <div class="row g-3">
+                <div class="col-12">
+                  <label for="sessionTitle" class="form-label"
+                    >Session Title</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="sessionTitle"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="sessionDate" class="form-label"
+                    >Date & Time</label
+                  >
+                  <input
+                    type="datetime-local"
+                    class="form-control"
+                    id="sessionDate"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="sessionDuration" class="form-label"
+                    >Duration (hours)</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="sessionDuration"
+                    min="0.5"
+                    max="4"
+                    step="0.5"
+                    value="1"
+                  />
+                </div>
+                <div class="col-12">
+                  <label for="sessionType" class="form-label"
+                    >Session Type</label
+                  >
+                  <select class="form-select" id="sessionType" required>
+                    <option value="office-hours">Office Hours</option>
+                    <option value="group-study">Group Study Session</option>
+                    <option value="review">Exam Review</option>
+                    <option value="makeup">Makeup Class</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label for="sessionDescription" class="form-label"
+                    >Description</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="sessionDescription"
+                    rows="3"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-info">
+                  <i class="bi bi-calendar-plus me-2"></i>Schedule Session
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/teacher-dashboard.js"></script>
+  </body>
+</html>

@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Library - BiTS Connect</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link href="assets/css/custom.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-white sticky-top border-bottom"
+      id="mainNav"
+    >
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+          <div class="bg-primary rounded me-2 p-2">
+            <i class="bi bi-book text-white"></i>
+          </div>
+          <span class="fw-bold">BiTS Connect</span>
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">
+                <i class="bi bi-info-circle me-1"></i>About
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="dashboard.html">
+                <i class="bi bi-speedometer2 me-1"></i>Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="library.html">
+                <i class="bi bi-book me-1"></i>Digital Library
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="gpa-tracker.html">
+                <i class="bi bi-bar-chart me-1"></i>GPA Tracker
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="assignments.html">
+                <i class="bi bi-file-earmark-text me-1"></i>Assignments
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="study-groups.html">
+                <i class="bi bi-people me-1"></i>Study Groups
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="messaging.html">
+                <i class="bi bi-chat-dots me-1"></i>Messages
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="blog.html">
+                <i class="bi bi-pen me-1"></i>Blog
+              </a>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center">
+            <span class="me-3">
+              <i class="bi bi-person me-1"></i>
+              <span id="userName"></span>
+              <small class="text-muted">(<span id="userRole"></span>)</small>
+              <span id="demoIndicator" class="badge bg-warning ms-2 d-none"
+                >Demo</span
+              >
+            </span>
+            <button class="btn btn-outline-secondary" onclick="logout()">
+              <i class="bi bi-box-arrow-right me-1"></i>Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid py-4">
+      <div class="row">
+        <!-- Header -->
+        <div class="col-12 mb-4">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h1 class="h3 mb-1">Digital Library</h1>
+              <p class="text-muted mb-0">
+                Access textbooks, research papers, and educational resources
+              </p>
+            </div>
+            <div class="d-flex gap-2">
+              <button
+                class="btn btn-outline-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#uploadModal"
+              >
+                <i class="bi bi-upload me-2"></i>Upload Resource
+              </button>
+              <button
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#requestModal"
+              >
+                <i class="bi bi-plus-lg me-2"></i>Request Resource
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Sidebar -->
+        <div class="col-lg-3 mb-4">
+          <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-bottom">
+              <h6 class="mb-0">Filters</h6>
+            </div>
+            <div class="card-body">
+              <!-- Search -->
+              <div class="mb-4">
+                <label for="searchInput" class="form-label"
+                  >Search Resources</label
+                >
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="searchInput"
+                    placeholder="Search..."
+                  />
+                  <button class="btn btn-outline-secondary" type="button">
+                    <i class="bi bi-search"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Categories -->
+              <div class="mb-4">
+                <h6 class="mb-3">Categories</h6>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="textbooks"
+                    id="catTextbooks"
+                    checked
+                  />
+                  <label class="form-check-label" for="catTextbooks">
+                    Textbooks <span class="badge bg-secondary ms-1">24</span>
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="research"
+                    id="catResearch"
+                    checked
+                  />
+                  <label class="form-check-label" for="catResearch">
+                    Research Papers
+                    <span class="badge bg-secondary ms-1">18</span>
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="guides"
+                    id="catGuides"
+                    checked
+                  />
+                  <label class="form-check-label" for="catGuides">
+                    Study Guides <span class="badge bg-secondary ms-1">12</span>
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="pdf"
+                    id="catPDF"
+                    checked
+                  />
+                  <label class="form-check-label" for="catPDF">
+                    PDF Documents
+                    <span class="badge bg-secondary ms-1">32</span>
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="epub"
+                    id="catEPUB"
+                    checked
+                  />
+                  <label class="form-check-label" for="catEPUB">
+                    EPUB Books <span class="badge bg-secondary ms-1">15</span>
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="videos"
+                    id="catVideos"
+                    checked
+                  />
+                  <label class="form-check-label" for="catVideos">
+                    Video Lectures
+                    <span class="badge bg-secondary ms-1">8</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Subject Filter -->
+              <div class="mb-4">
+                <h6 class="mb-3">Subjects</h6>
+                <select class="form-select" id="subjectFilter">
+                  <option value="">All Subjects</option>
+                  <option value="software-engineering">
+                    Software Engineering
+                  </option>
+                  <option value="database-systems">Database Systems</option>
+                  <option value="algorithms">
+                    Data Structures & Algorithms
+                  </option>
+                  <option value="networks">Computer Networks</option>
+                  <option value="security">Cybersecurity</option>
+                  <option value="mobile-dev">Mobile Development</option>
+                  <option value="ai-ml">AI & Machine Learning</option>
+                </select>
+              </div>
+
+              <!-- Sort Options -->
+              <div class="mb-4">
+                <h6 class="mb-3">Sort By</h6>
+                <select class="form-select" id="sortBy">
+                  <option value="newest">Newest First</option>
+                  <option value="oldest">Oldest First</option>
+                  <option value="name">Name (A-Z)</option>
+                  <option value="downloads">Most Downloaded</option>
+                  <option value="rating">Highest Rated</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Stats -->
+          <div class="card border-0 shadow-sm mt-4">
+            <div class="card-body">
+              <h6 class="mb-3">Library Stats</h6>
+              <div class="row g-3">
+                <div class="col-6">
+                  <div class="text-center">
+                    <div class="h4 text-primary mb-1">109</div>
+                    <small class="text-muted">Total Resources</small>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="text-center">
+                    <div class="h4 text-success mb-1">1.2k</div>
+                    <small class="text-muted">Downloads</small>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="text-center">
+                    <div class="h4 text-info mb-1">47</div>
+                    <small class="text-muted">Contributors</small>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="text-center">
+                    <div class="h4 text-warning mb-1">4.3</div>
+                    <small class="text-muted">Avg Rating</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-lg-9">
+          <!-- View Toggle -->
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+              <span class="text-muted" id="resultCount"
+                >Showing 15 of 109 resources</span
+              >
+            </div>
+            <div class="btn-group" role="group">
+              <input
+                type="radio"
+                class="btn-check"
+                name="viewMode"
+                id="gridView"
+                checked
+              />
+              <label class="btn btn-outline-secondary" for="gridView">
+                <i class="bi bi-grid"></i>
+              </label>
+              <input
+                type="radio"
+                class="btn-check"
+                name="viewMode"
+                id="listView"
+              />
+              <label class="btn btn-outline-secondary" for="listView">
+                <i class="bi bi-list"></i>
+              </label>
+            </div>
+          </div>
+
+          <!-- Resources Grid -->
+          <div id="resourcesContainer" class="row g-4">
+            <!-- Resources will be populated here -->
+          </div>
+
+          <!-- Pagination -->
+          <nav class="mt-5">
+            <ul class="pagination justify-content-center">
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
+              </li>
+              <li class="page-item active">
+                <a class="page-link" href="#">1</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upload Modal -->
+    <div class="modal fade" id="uploadModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Upload Resource</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="uploadForm">
+              <div class="mb-3">
+                <label for="resourceTitle" class="form-label">Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="resourceTitle"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="resourceFile" class="form-label">File</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="resourceFile"
+                  accept=".pdf,.epub,.doc,.docx,.ppt,.pptx"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="resourceCategory" class="form-label"
+                  >Category</label
+                >
+                <select class="form-select" id="resourceCategory" required>
+                  <option value="">Select Category</option>
+                  <option value="textbooks">Textbooks</option>
+                  <option value="research">Research Papers</option>
+                  <option value="guides">Study Guides</option>
+                  <option value="pdf">PDF Documents</option>
+                  <option value="epub">EPUB Books</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="resourceSubject" class="form-label">Subject</label>
+                <select class="form-select" id="resourceSubject" required>
+                  <option value="">Select Subject</option>
+                  <option value="software-engineering">
+                    Software Engineering
+                  </option>
+                  <option value="database-systems">Database Systems</option>
+                  <option value="algorithms">
+                    Data Structures & Algorithms
+                  </option>
+                  <option value="networks">Computer Networks</option>
+                  <option value="security">Cybersecurity</option>
+                  <option value="mobile-dev">Mobile Development</option>
+                  <option value="ai-ml">AI & Machine Learning</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="resourceDescription" class="form-label"
+                  >Description</label
+                >
+                <textarea
+                  class="form-control"
+                  id="resourceDescription"
+                  rows="3"
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                Upload Resource
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Request Modal -->
+    <div class="modal fade" id="requestModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Request Resource</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="requestForm">
+              <div class="mb-3">
+                <label for="requestTitle" class="form-label"
+                  >Resource Title</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="requestTitle"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="requestAuthor" class="form-label"
+                  >Author (if known)</label
+                >
+                <input type="text" class="form-control" id="requestAuthor" />
+              </div>
+              <div class="mb-3">
+                <label for="requestSubject" class="form-label">Subject</label>
+                <select class="form-select" id="requestSubject" required>
+                  <option value="">Select Subject</option>
+                  <option value="software-engineering">
+                    Software Engineering
+                  </option>
+                  <option value="database-systems">Database Systems</option>
+                  <option value="algorithms">
+                    Data Structures & Algorithms
+                  </option>
+                  <option value="networks">Computer Networks</option>
+                  <option value="security">Cybersecurity</option>
+                  <option value="mobile-dev">Mobile Development</option>
+                  <option value="ai-ml">AI & Machine Learning</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="requestType" class="form-label"
+                  >Resource Type</label
+                >
+                <select class="form-select" id="requestType" required>
+                  <option value="">Select Type</option>
+                  <option value="textbook">Textbook</option>
+                  <option value="research">Research Paper</option>
+                  <option value="guide">Study Guide</option>
+                  <option value="slides">Lecture Slides</option>
+                  <option value="video">Video Lecture</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="requestReason" class="form-label"
+                  >Why do you need this resource?</label
+                >
+                <textarea
+                  class="form-control"
+                  id="requestReason"
+                  rows="3"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                Submit Request
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PDF Reader Modal -->
+    <div class="modal fade" id="pdfReaderModal" tabindex="-1">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="pdfReaderTitle">PDF Reader</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body p-0">
+            <div
+              class="d-flex align-items-center justify-content-center bg-light"
+              style="height: 70vh"
+            >
+              <div class="text-center">
+                <i class="bi bi-file-earmark-pdf text-muted h1"></i>
+                <p class="text-muted">PDF Reader (Demo Mode)</p>
+                <p class="small text-muted">
+                  In full version, PDF content would be displayed here
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-primary">
+              <i class="bi bi-download me-2"></i>Download
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EPUB Reader Modal -->
+    <div class="modal fade" id="epubReaderModal" tabindex="-1">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="epubReaderTitle">EPUB Reader</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body p-0">
+            <div
+              class="d-flex align-items-center justify-content-center bg-light"
+              style="height: 70vh"
+            >
+              <div class="text-center">
+                <i class="bi bi-book text-muted h1"></i>
+                <p class="text-muted">EPUB Reader (Demo Mode)</p>
+                <p class="small text-muted">
+                  In full version, EPUB content would be displayed here
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-primary">
+              <i class="bi bi-download me-2"></i>Download
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo Mode Warning Modal -->
+    <div class="modal fade" id="demoModeModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <i class="bi bi-exclamation-triangle text-warning me-2"></i>
+              Backend Not Available
+            </h5>
+          </div>
+          <div class="modal-body">
+            <div class="alert alert-warning">
+              <h6>BiTS Connect is running in Demo Mode</h6>
+              <p class="mb-2">
+                The backend server is not currently running. You can:
+              </p>
+              <ul class="mb-0">
+                <li>Explore all features in demo mode</li>
+                <li>Set up the backend for full functionality</li>
+              </ul>
+            </div>
+
+            <h6>Backend Setup Instructions:</h6>
+            <ol>
+              <li>Ensure you have PHP 8.1+ and MySQL installed</li>
+              <li>Navigate to the server directory</li>
+              <li>Run: <code>composer install</code></li>
+              <li>Run: <code>./install_database.sh</code></li>
+              <li>Run: <code>php artisan serve</code></li>
+            </ol>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-warning"
+              onclick="enableDemoMode()"
+              data-bs-dismiss="modal"
+            >
+              Continue in Demo Mode
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/library.js"></script>
+  </body>
+</html>

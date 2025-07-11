@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Groups - BiTS Connect</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link href="assets/css/custom.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-white sticky-top border-bottom"
+      id="mainNav"
+    >
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+          <div class="bg-primary rounded me-2 p-2">
+            <i class="bi bi-book text-white"></i>
+          </div>
+          <span class="fw-bold">BiTS Connect</span>
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">
+                <i class="bi bi-info-circle me-1"></i>About
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="dashboard.html">
+                <i class="bi bi-speedometer2 me-1"></i>Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="library.html">
+                <i class="bi bi-book me-1"></i>Digital Library
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="gpa-tracker.html">
+                <i class="bi bi-bar-chart me-1"></i>GPA Tracker
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="assignments.html">
+                <i class="bi bi-file-earmark-text me-1"></i>Assignments
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="study-groups.html">
+                <i class="bi bi-people me-1"></i>Study Groups
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="messaging.html">
+                <i class="bi bi-chat-dots me-1"></i>Messages
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="blog.html">
+                <i class="bi bi-pen me-1"></i>Blog
+              </a>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center">
+            <span class="me-3">
+              <i class="bi bi-person me-1"></i>
+              <span id="userName"></span>
+              <small class="text-muted">(<span id="userRole"></span>)</small>
+              <span id="demoIndicator" class="badge bg-warning ms-2 d-none"
+                >Demo</span
+              >
+            </span>
+            <button class="btn btn-outline-secondary" onclick="logout()">
+              <i class="bi bi-box-arrow-right me-1"></i>Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid py-4">
+      <!-- Header -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h1 class="h3 mb-1">Study Groups</h1>
+              <p class="text-muted mb-0">
+                Join study groups and collaborate with peers
+              </p>
+            </div>
+            <div class="d-flex gap-2">
+              <button
+                class="btn btn-outline-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#searchGroupsModal"
+              >
+                <i class="bi bi-search me-2"></i>Find Groups
+              </button>
+              <button
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#createGroupModal"
+              >
+                <i class="bi bi-plus-lg me-2"></i>Create Group
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="row g-4 mb-4">
+        <div class="col-lg-3 col-md-6">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="bg-primary bg-opacity-10 rounded p-3 me-3">
+                  <i class="bi bi-people text-primary h4 mb-0"></i>
+                </div>
+                <div>
+                  <div class="h4 mb-0" id="myGroupsCount">3</div>
+                  <small class="text-muted">My Groups</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="bg-success bg-opacity-10 rounded p-3 me-3">
+                  <i class="bi bi-calendar-event text-success h4 mb-0"></i>
+                </div>
+                <div>
+                  <div class="h4 mb-0" id="upcomingSessionsCount">5</div>
+                  <small class="text-muted">Upcoming Sessions</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="bg-info bg-opacity-10 rounded p-3 me-3">
+                  <i class="bi bi-clock text-info h4 mb-0"></i>
+                </div>
+                <div>
+                  <div class="h4 mb-0" id="studyHours">24</div>
+                  <small class="text-muted">Study Hours</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="bg-warning bg-opacity-10 rounded p-3 me-3">
+                  <i class="bi bi-trophy text-warning h4 mb-0"></i>
+                </div>
+                <div>
+                  <div class="h4 mb-0" id="completedSessions">18</div>
+                  <small class="text-muted">Completed Sessions</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <!-- My Groups -->
+        <div class="col-lg-8">
+          <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-bottom">
+              <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">My Study Groups</h5>
+                <div class="btn-group btn-group-sm" role="group">
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="groupView"
+                    id="activeGroups"
+                    checked
+                  />
+                  <label class="btn btn-outline-secondary" for="activeGroups"
+                    >Active</label
+                  >
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="groupView"
+                    id="allGroups"
+                  />
+                  <label class="btn btn-outline-secondary" for="allGroups"
+                    >All</label
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <div id="myGroupsList">
+                <!-- Groups will be populated here -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upcoming Sessions -->
+        <div class="col-lg-4">
+          <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-bottom">
+              <h5 class="mb-0">Today's Sessions</h5>
+            </div>
+            <div class="card-body p-0">
+              <div id="todaySessionsList">
+                <!-- Sessions will be populated here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Available Groups -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-bottom">
+              <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Available Study Groups</h5>
+                <div class="d-flex gap-2">
+                  <select class="form-select form-select-sm" id="subjectFilter">
+                    <option value="">All Subjects</option>
+                    <option value="software-engineering">
+                      Software Engineering
+                    </option>
+                    <option value="database-systems">Database Systems</option>
+                    <option value="computer-networks">Computer Networks</option>
+                    <option value="cybersecurity">Cybersecurity</option>
+                  </select>
+                  <button
+                    class="btn btn-primary btn-sm"
+                    data-bs-toggle="modal"
+                    data-bs-target="#createGroupModal"
+                  >
+                    <i class="bi bi-plus-lg me-1"></i>Create
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <div class="row g-0" id="availableGroupsList">
+                <!-- Available groups will be populated here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Group Modal -->
+    <div class="modal fade" id="createGroupModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Create Study Group</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="createGroupForm">
+              <div class="row g-3">
+                <div class="col-12">
+                  <label for="groupName" class="form-label">Group Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="groupName"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="groupSubject" class="form-label">Subject</label>
+                  <select class="form-select" id="groupSubject" required>
+                    <option value="">Select Subject</option>
+                    <option value="software-engineering">
+                      Software Engineering
+                    </option>
+                    <option value="database-systems">Database Systems</option>
+                    <option value="computer-networks">Computer Networks</option>
+                    <option value="cybersecurity">Cybersecurity</option>
+                    <option value="algorithms">
+                      Data Structures & Algorithms
+                    </option>
+                    <option value="mobile-development">
+                      Mobile Development
+                    </option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="maxMembers" class="form-label">Max Members</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="maxMembers"
+                    min="2"
+                    max="20"
+                    value="8"
+                    required
+                  />
+                </div>
+                <div class="col-12">
+                  <label for="groupDescription" class="form-label"
+                    >Description</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="groupDescription"
+                    rows="3"
+                    required
+                  ></textarea>
+                </div>
+                <div class="col-md-6">
+                  <label for="meetingType" class="form-label"
+                    >Meeting Type</label
+                  >
+                  <select class="form-select" id="meetingType" required>
+                    <option value="in-person">In Person</option>
+                    <option value="online">Online</option>
+                    <option value="hybrid">Hybrid</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="meetingLocation" class="form-label"
+                    >Location/Link</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="meetingLocation"
+                    placeholder="Room number or online link"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="meetingDay" class="form-label">Meeting Day</label>
+                  <select class="form-select" id="meetingDay" required>
+                    <option value="">Select Day</option>
+                    <option value="monday">Monday</option>
+                    <option value="tuesday">Tuesday</option>
+                    <option value="wednesday">Wednesday</option>
+                    <option value="thursday">Thursday</option>
+                    <option value="friday">Friday</option>
+                    <option value="saturday">Saturday</option>
+                    <option value="sunday">Sunday</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="meetingTime" class="form-label"
+                    >Meeting Time</label
+                  >
+                  <input
+                    type="time"
+                    class="form-control"
+                    id="meetingTime"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-primary">
+                  <i class="bi bi-plus-lg me-2"></i>Create Study Group
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Group Details Modal -->
+    <div class="modal fade" id="groupDetailsModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="groupDetailsTitle">Group Details</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div id="groupDetailsContent">
+              <!-- Group details will be populated here -->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary" id="joinGroupBtn">
+              <i class="bi bi-plus-lg me-2"></i>Join Group
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Schedule Session Modal -->
+    <div class="modal fade" id="scheduleSessionModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Schedule Study Session</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="scheduleSessionForm">
+              <input type="hidden" id="sessionGroupId" />
+              <div class="mb-3">
+                <label for="sessionTitle" class="form-label"
+                  >Session Title</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="sessionTitle"
+                  required
+                />
+              </div>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="sessionDate" class="form-label">Date</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="sessionDate"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="sessionTime" class="form-label">Time</label>
+                  <input
+                    type="time"
+                    class="form-control"
+                    id="sessionTime"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="mb-3 mt-3">
+                <label for="sessionDuration" class="form-label"
+                  >Duration (hours)</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="sessionDuration"
+                  min="1"
+                  max="8"
+                  value="2"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="sessionAgenda" class="form-label">Agenda</label>
+                <textarea
+                  class="form-control"
+                  id="sessionAgenda"
+                  rows="3"
+                  required
+                ></textarea>
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary">
+                  <i class="bi bi-calendar-plus me-2"></i>Schedule Session
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo Mode Warning Modal -->
+    <div class="modal fade" id="demoModeModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <i class="bi bi-exclamation-triangle text-warning me-2"></i>
+              Backend Not Available
+            </h5>
+          </div>
+          <div class="modal-body">
+            <div class="alert alert-warning">
+              <h6>BiTS Connect is running in Demo Mode</h6>
+              <p class="mb-2">
+                The backend server is not currently running. You can:
+              </p>
+              <ul class="mb-0">
+                <li>Explore all features in demo mode</li>
+                <li>Set up the backend for full functionality</li>
+              </ul>
+            </div>
+
+            <h6>Backend Setup Instructions:</h6>
+            <ol>
+              <li>Ensure you have PHP 8.1+ and MySQL installed</li>
+              <li>Navigate to the server directory</li>
+              <li>Run: <code>composer install</code></li>
+              <li>Run: <code>./install_database.sh</code></li>
+              <li>Run: <code>php artisan serve</code></li>
+            </ol>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-warning"
+              onclick="enableDemoMode()"
+              data-bs-dismiss="modal"
+            >
+              Continue in Demo Mode
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/study-groups.js"></script>
+  </body>
+</html>
